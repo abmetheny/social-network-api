@@ -102,8 +102,6 @@ const populateThoughts = (thought, username) => {
 
 const userArray = populateUsers(usernames, emailAddresses);
 const thoughtArray = populateThoughts(thoughts, usernames);
-
-console.log(userArray, thoughtArray)
-  
+ 
 // Export the functions for use in seed.js
 module.exports = [userArray, thoughtArray];

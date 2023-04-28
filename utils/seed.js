@@ -1,12 +1,13 @@
 const connection = require('../config/connection');
 const { Thought, User } = require('../models');
-const userArray = require('./data');
-const thoughtArray = require('./data');
+const [ userArray, thoughtArray ] = require('./data');
 
 connection.on('error', (err) => err);
 
 connection.once('open', async () => {
   console.log('connected');
+  console.log(userArray);
+  console.log(thoughtArray)
 
   // Drop existing thoughts
   await Thought.deleteMany({});
