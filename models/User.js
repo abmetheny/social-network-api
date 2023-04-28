@@ -14,14 +14,14 @@ const userSchema = new Schema(
         unique: true,
         trim: true
       },
-      thoughts: {
+      thoughts: [{
         type: Schema.Types.ObjectId,
         ref: 'Thought',
-      },
-      friends: {
+      }],
+      friends: [{
         type: Schema.Types.ObjectId,
         ref: 'User',
-      }
+      }]
   },
   {
     toJSON: {
@@ -30,6 +30,14 @@ const userSchema = new Schema(
     id: false,
   }
 );
+
+// Virtual property `friendCount` that gets and sets the number of friends in the friends array
+userSchema
+  .virtual('friendCount')
+  // Getter
+  .get(function () {
+    return this.friends.count();
+  });
 
 const User = model('user', userSchema);
 
