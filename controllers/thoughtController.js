@@ -3,10 +3,20 @@ const { Thought } = require('../models');
 module.exports = {
   // Get all thoughts
   getThoughts(req, res) {
-    Thought.find()
-      .populate({ path: 'reactions', select:'-__v' })
-      .then((thoughts) => res.json(thoughts))
-      .catch((err) => res.status(500).json(err));
+    Thought.find({})
+        .exec(((err, result) => {
+        if (err) {
+            res.status(500).send({error: JSON.stringify(err)});
+        } else {
+            const allResults = result.map((result) => {
+                return { id: result._id, username: result.username, createdAt: result.createdAt};
+            });
+            res.status(200).send(allResults);
+        }
+    }))   
+    // Thought.find({}).exec("select")
+    //     .then((result) => res.status(200).json(result))
+    //     .catch((error) => res.status(500).send({error: JSON.stringify(error)}));       
   },
   // Get a single thought
   getSingleThought(req, res) {

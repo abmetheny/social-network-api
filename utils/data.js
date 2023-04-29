@@ -75,33 +75,76 @@ const thoughts = [
     'What should I have for dinner tonight?',
     'I. Am. So. Tired.',
 ];
-  
+
+const reactions = [
+    'Agreed.',
+    'Me either.',
+    'Me too!',
+    'Never.',
+    'So relatable!',
+    'Totally!',
+    'Absolutely not.',
+    'Same.',
+    'For real :)',
+    'Uh, what?',
+    'Yesssss',
+    'I think so!',
+    'Beats me.',
+    'Good for you.',
+    'I doubt it.',
+    'Huzzah!',
+    'Yup!',
+    'Definitely.',
+    'Me too.',
+    'Awesome!',
+    'Lame.',
+    '???',
+    'Ditto.',
+];
+
+// Function to create reaction objects from the username and reaction arrays
+const populateReactions = (reaction, username) => {
+    const results = [];
+    for (let i = 0; i < reaction.length; i++) {
+        results.push({
+        reactionBody: reaction[i],
+        username: username[i],
+        });
+    }
+    return results;
+};
+
+const reactionArray = populateReactions(reactions, usernames);
+
 // Function to create user objects from the username and email arrays
-const populateUsers = (username, email) => {
+const populateUsers = (username, email, thought) => {
 const results = [];
 for (let i = 0; i < username.length; i++) {
     results.push({
     username: username[i],
     email: email[i],
+    thoughts: [thought[i]],
+    friends: [],
     });
 }
 return results;
 };
 
 // Function to create thought objects from the thought and username arrays
-const populateThoughts = (thought, username) => {
+const populateThoughts = (thought, username, reaction) => {
     const results = [];
     for (let i = 0; i < thought.length; i++) {
         results.push({
         thoughts: thought[i],
         username: username[i],
+        reactions: [reaction[i]],
         });
     }
     return results;
-    };
+};
 
-const userArray = populateUsers(usernames, emailAddresses);
-const thoughtArray = populateThoughts(thoughts, usernames);
+const userArray = populateUsers(usernames, emailAddresses, thoughts);
+const thoughtArray = populateThoughts(thoughts, usernames, reactionArray);
  
 // Export the functions for use in seed.js
 module.exports = [userArray, thoughtArray];
