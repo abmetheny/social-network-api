@@ -108,7 +108,7 @@ const populateReactions = (reaction, username) => {
     for (let i = 0; i < reaction.length; i++) {
         results.push({
         reactionBody: reaction[i],
-        username: username[i],
+        username: username[10],
         });
     }
     return results;
@@ -117,7 +117,7 @@ const populateReactions = (reaction, username) => {
 const reactionArray = populateReactions(reactions, usernames);
 
 // Function to create user objects from the username and email arrays
-const populateUsers = (username, email, thought) => {
+const populateUsers = (username, email) => {
 const results = [];
 for (let i = 0; i < username.length; i++) {
     results.push({
@@ -135,7 +135,7 @@ const populateThoughts = (thought, username, reaction) => {
     const results = [];
     for (let i = 0; i < thought.length; i++) {
         results.push({
-        thoughts: thought[i],
+        thoughtText: thought[i],
         username: username[i],
         reactions: [reaction[i]],
         });
@@ -143,7 +143,7 @@ const populateThoughts = (thought, username, reaction) => {
     return results;
 };
 
-const userArray = populateUsers(usernames, emailAddresses, thoughts);
+const userArray = populateUsers(usernames, emailAddresses);
 const thoughtArray = populateThoughts(thoughts, usernames, reactionArray);
  
 // Export the functions for use in seed.js

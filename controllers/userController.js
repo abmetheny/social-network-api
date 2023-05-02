@@ -4,7 +4,7 @@ module.exports = {
   // Get all users
   getUsers(req, res) {
     User.find()
-      .populate( 'thoughts' )
+      // .populate({ path: 'thoughts', select: '_id' })
       .then((users) => {res.json(users)})
       .catch((err) => {
         console.log(err);

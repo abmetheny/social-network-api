@@ -15,15 +15,18 @@ connection.once('open', async () => {
   await User.deleteMany({});
 
   // Add thoughts to the collection and await the results
-  const thoughts = await Thought.collection.insertMany(thoughtArray);
+  const thoughtIds = await Thought.insertMany(thoughtArray);
 
+  // Pushes thought ids to the user array to populate the thoughts subdocument collection
   for (let i = 0; i < userArray.length; i++) {
-    // console.log(thoughtArray[i]._id);
-    userArray[i].thoughts.push(thoughtArray[i]._id)
+    userArray[i].thoughts.push(thoughtIds[i]._id)
   };
   
   // Add users to the collection and await the results
-  await User.collection.insertMany(userArray);
+  const userIds = await User.insertMany(userArray);
+
+  // Updates user collection to add a friend to each user array
+  await User.updateMany({}, { friends: userIds[10]._id });
 
   // Log out the seed data to indicate what should appear in the database
   console.info('Seeding complete! 🌱');
