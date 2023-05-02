@@ -123,7 +123,7 @@ for (let i = 0; i < username.length; i++) {
     results.push({
     username: username[i],
     email: email[i],
-    thoughts: [thought[i]],
+    thoughts: [],
     friends: [],
     });
 }
