@@ -7,7 +7,7 @@ I WANT an API for my social network that uses a NoSQL database
 SO THAT my website can handle large amounts of unstructured data
 
 ## Link to Video Walkthrough
-[Social Network API](*)
+[Social Network API](https://drive.google.com/file/d/1Ehl6RZq8zM-Z1t87yOiYN17Jhh-kpGpW/view?usp=sharing)
 
 ## Site Functionality
 * Run 'npm seed' to seed a MongoDB database with demo data
