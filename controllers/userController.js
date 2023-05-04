@@ -4,7 +4,6 @@ module.exports = {
   // Get all users
   getUsers(req, res) {
     User.find()
-      // .populate({ path: 'thoughts', select: '_id' })
       .then((users) => {res.json(users)})
       .catch((err) => {
         console.log(err);
@@ -51,6 +50,7 @@ module.exports = {
       .then((user) =>
         !user
           ? res.status(404).json({ message: 'No user with that ID' })
+          // Delete any thoughts created by the user
           : Thought.deleteMany({ _id: { $in: user.thoughts } })
       )
       .then(() => res.json({ message: 'User and associated thoughts deleted!' }))

@@ -12,7 +12,6 @@ module.exports = {
   // Get a single thought
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
-      // .populate({ path: 'reactions', select:'-__v' })
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with that ID' })
@@ -24,6 +23,7 @@ module.exports = {
   createThought(req, res) {
     Thought.create(req.body)
       .then((thought) => {
+        // Push new thought id to the user object with the specified username
         return User.findOneAndUpdate(
           { username: req.body.username },
           { $addToSet: { thoughts: thought._id } },

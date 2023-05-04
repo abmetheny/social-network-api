@@ -31,7 +31,7 @@ const userSchema = new Schema(
   }
 );
 
-// Virtual property `friendCount` that gets and sets the number of friends in the friends array
+// Virtual property `friendCount` that calculates the number of friends in the friends array
 userSchema
   .virtual('friendCount')
   // Getter
